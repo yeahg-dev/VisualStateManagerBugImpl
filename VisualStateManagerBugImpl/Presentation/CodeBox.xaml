@@ -61,7 +61,7 @@
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate>
-                                    <local:CodeBoxDigit Digit="{Binding .}" IsMatch="{TemplateBinding IsMatch}"/>
+                                    <local:CodeBoxDigit Digit="{Binding .}" IsMatch="{Binding IsMatch, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                             <ItemsRepeater.RenderTransform>

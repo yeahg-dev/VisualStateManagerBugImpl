@@ -19,8 +19,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Spacing="16">
-        <ToggleButton x:Name="MatchButton" Content="Toggle Match" IsThreeState="True" />
-        <local:CodeBox x:Name="Box" IsMatch="{Binding ElementName=MatchButton, Path=IsChecked}"/>
+        <local:CodeBox x:Name="Box" IsMatch="{Binding IsMatch}"/>
         <Button Content="Toggle IsMatch" Command="{Binding ToggleCommand}"/>
       </StackPanel>
     </Grid>
