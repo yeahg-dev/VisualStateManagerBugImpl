@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:utu="using:Uno.Toolkit.UI"
     xmlns:local="using:VisualStateManagerBugImpl.Presentation">
 
     <Style TargetType="local:CodeBoxDigit">
@@ -61,7 +62,13 @@
                             </ItemsRepeater.Layout>
                             <ItemsRepeater.ItemTemplate>
                                 <DataTemplate>
-                                    <local:CodeBoxDigit Digit="{Binding .}" IsMatch="{Binding IsMatch, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <!-- This does not work after Uno 5.5: -->
+                                    <local:CodeBoxDigit IsMatch="{Binding IsMatch, RelativeSource={RelativeSource TemplatedParent}}"
+                                        Digit="{Binding .}" />
+
+                                    <!-- This also does not work: -->
+                                    <!-- <local:CodeBoxDigit IsMatch="{utu:AncestorBinding AncestorType=local:CodeBox, Path=IsMatch}"
+                                        Digit="{Binding .}" /> -->
                                 </DataTemplate>
                             </ItemsRepeater.ItemTemplate>
                             <ItemsRepeater.RenderTransform>
