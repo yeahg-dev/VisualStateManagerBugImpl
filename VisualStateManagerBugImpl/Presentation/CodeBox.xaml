@@ -1,0 +1,76 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VisualStateManagerBugImpl.Presentation">
+
+    <Style TargetType="local:CodeBoxDigit">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="q:CodeBoxDigit">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="MatchState">
+                                <VisualState x:Name="Unknown"/>
+                                <VisualState x:Name="Matched">
+                                    <VisualState.Setters>
+                                        <Setter Target="Underline.Fill" Value="Green"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="NotMatched">
+                                    <VisualState.Setters>
+                                        <Setter Target="Underline.Fill" Value="Red"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <TextBlock Text="{TemplateBinding Digit}" />
+                        <Rectangle x:Name="Underline" Height="2"
+                                   Fill="Black" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:CodeBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:CodeBox">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="MatchState">
+                                <VisualState x:Name="Unknown"/>
+                                <VisualState x:Name="Matched">
+                                    <VisualState.Setters>
+                                        <Setter Target="DigitsPresenter.Background" Value="Yellow"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="NotMatched">
+                                    <VisualState.Setters>
+                                        <Setter Target="DigitsPresenter.Background" Value="Pink"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <ItemsRepeater Control.IsTemplateFocusTarget="true" x:Name="DigitsPresenter" ItemsSource="{TemplateBinding Digits}"
+                            VerticalAlignment="Bottom">
+                            <ItemsRepeater.Layout>
+                                <StackLayout Orientation="Horizontal" Spacing="8"/>
+                            </ItemsRepeater.Layout>
+                            <ItemsRepeater.ItemTemplate>
+                                <DataTemplate>
+                                    <local:CodeBoxDigit Digit="{Binding .}" IsMatch="{TemplateBinding IsMatch}"/>
+                                </DataTemplate>
+                            </ItemsRepeater.ItemTemplate>
+                            <ItemsRepeater.RenderTransform>
+                                <TranslateTransform/>
+                            </ItemsRepeater.RenderTransform> 
+                        </ItemsRepeater>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
